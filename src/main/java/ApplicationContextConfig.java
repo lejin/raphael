@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package info.lejin.raphael.config;
+
 
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -41,6 +42,7 @@ public class ApplicationContextConfig {
         LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(dataSource);
         localSessionFactoryBuilder.scanPackages("info.lejin.raphael.model");
         localSessionFactoryBuilder.setProperty("hibernate.show_sql", "true");
+        localSessionFactoryBuilder.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         return localSessionFactoryBuilder.buildSessionFactory();
     }
 
@@ -50,4 +52,5 @@ public class ApplicationContextConfig {
         HibernateTransactionManager transactionManager=new HibernateTransactionManager(sessionFactory);
         return transactionManager;
     }
+ 
 }
