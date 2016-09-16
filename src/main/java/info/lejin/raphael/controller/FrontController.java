@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
@@ -28,12 +29,13 @@ public class FrontController {
     @Autowired
     private UserDao userDao;
     
-    @ResponseBody
-    @RequestMapping(method = RequestMethod.GET,path = "/users",produces="application/json")
-    public String getUsers(){
+    @RequestMapping(method = RequestMethod.GET,path = "/users")
+    public ModelAndView getUsers(){
+    	ModelAndView view= new ModelAndView("index");
        List<User> userlist=userDao.list();
        userlist.forEach(user->System.out.println(user.getUsername()));
-       return new Gson().toJson(userlist);
+       view.addObject("users", userlist);
+       return view;
     }
     
 }
