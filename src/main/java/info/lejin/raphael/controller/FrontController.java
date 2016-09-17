@@ -29,9 +29,9 @@ public class FrontController {
     @Autowired
     private UserDao userDao;
     
-    @RequestMapping(method = RequestMethod.GET,path = "/users")
+    @RequestMapping(method = RequestMethod.GET,path = "admin/home")
     public ModelAndView getUsers(){
-    	ModelAndView view= new ModelAndView("index");
+    	ModelAndView view= new ModelAndView("admin/index");
        List<User> userlist=userDao.list();
        userlist.forEach(user->System.out.println(user.getUsername()));
        view.addObject("users", userlist);

@@ -7,7 +7,10 @@ package info.lejin.raphael.dao;
 
 import info.lejin.raphael.model.User;
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -18,31 +21,38 @@ import org.springframework.transaction.annotation.Transactional;
  * @author lejin
  */
 @Repository
-public class UserDaoImpl implements UserDao{
-    
-    @Autowired
-    private SessionFactory sessionFactory;
+public class UserDaoImpl implements UserDao {
 
-    @Override
-    @Transactional
-    public List<User> list() {
-        List<User> userList=sessionFactory.getCurrentSession().createCriteria(User.class).list();
-        return userList;
-    }
+	@Autowired
+	private SessionFactory sessionFactory;
 
-    @Override
-    public void saveOrUpdate(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	@Transactional
+	public List<User> list() {
+		List<User> userList = sessionFactory.getCurrentSession().createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return userList;
+	}
 
-    @Override
-    public User get(int userID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	@Transactional
+	public void saveOrUpdate(User user) {
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
+	}
 
-    @Override
-    public void delete(int userID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+	@Override
+	@Transactional
+	public User get(int userID) {
+		User user = (User) sessionFactory.getCurrentSession().createCriteria(User.class)
+				.add(Restrictions.eq("id", userID));
+		return user;
+	}
+
+	@Override
+	@Transactional
+	public void delete(int userID) {
+		User user = new User();
+		user.setId(userID);
+		sessionFactory.getCurrentSession().delete(user);
+	}
+
 }
