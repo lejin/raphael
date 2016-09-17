@@ -14,6 +14,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
+ *this class represents the web.xml file
  *
  * @author lejin
  */

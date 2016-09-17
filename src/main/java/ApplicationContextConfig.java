@@ -22,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
+ *this class is responsible for all the application configuration settings and beans
+ *represents spring's XML configuration file
  *
  * @author lejin
  */
