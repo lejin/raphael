@@ -66,6 +66,11 @@
 															colspan="1"
 															aria-label="Platform(s): activate to sort column ascending"
 															style="width: 188px;">Role</th>
+														<th class="sorting" tabindex="0"
+															aria-controls="dataTables-example" rowspan="1"
+															colspan="1"
+															aria-label="Platform(s): activate to sort column ascending"
+															style="width: 188px;">Edit</th>
 
 													</tr>
 												</thead>
@@ -75,6 +80,7 @@
 															<td class="sorting_1">${status.count}</td>
 															<td>${user.username}</td>
 															<td>${user.role}</td>
+															<td><buutton class="btn btn-primary">Edit</buutton> &nbsp;<button class="btn btn-danger">Delete</button></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -97,23 +103,23 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-	<!-- Modal -->
+	<!-- Modal 1-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-			<spring:url value="/admin/user/add" var="userActionUrl" />
-			<form:form role="form" modelAttribute="userForm"
-								action="${userActionUrl}" method="post">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Add User</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-12">
-							
+				<spring:url value="/admin/user/add" var="userActionUrl" />
+				<form:form role="form" modelAttribute="userForm"
+					action="${userActionUrl}" method="post">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -150,21 +156,97 @@
 										</form:select>
 									</div>
 								</div>
-							
+
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save changes</button>
-				</div></form:form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save
+							changes</button>
+					</div>
+				</form:form>
 			</div>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+	<!-- Modal 2-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<spring:url value="/admin/user/update" var="userActionUrl" />
+				<form:form role="form" modelAttribute="userForm"
+					action="${userActionUrl}" method="post">
+					<form:hidden path="id" name="id" id="id"/>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add User</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
 
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Username</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<form:input type="text" name="username" path="username"
+											placehoder="Username" class="form-control" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Password</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<form:input type="password" name="password" path="password"
+											placeholder="Password" class="form-control" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Role</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<form:select type="password" name="role" path="role"
+											class="form-control">
+											<form:option value="admin">admin</form:option>
+											<form:option value="editor">editor</form:option>
+										</form:select>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save
+							changes</button>
+					</div>
+				</form:form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<script type="text/javascript">
+	function getUserById(userID){
+		
+	}
+	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
